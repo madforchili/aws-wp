@@ -17,6 +17,14 @@ resource "aws_security_group" "FESG" {
         protocol = "tcp"
     }
 
+    ingress {
+        cidr_blocks = [ "0.0.0.0/0" ]
+        description = "allow https"
+        from_port = 0
+        to_port = 443
+        protocol = "tcp"
+    }
+
     egress{
         cidr_blocks = [ "0.0.0.0/0" ]
         description = "permit all"
