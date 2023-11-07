@@ -7,7 +7,6 @@ https://github.com/madforchili/aws-wp/
 ## reference
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hosting-wordpress-aml-2023.html
 
-
 change key permission e.g.
 ```
 chmod 400 myKey.pem
@@ -40,4 +39,23 @@ vi wordpress/wp-config.php
 
 cp -r wordpress/* /var/www/html/
 vim /etc/httpd/conf/httpd.conf
+```
+
+## install ssl/tls
+before you do this make sure you open port 443 Inbound rule on Security group.
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2023.html
+
+```
+sudo dnf install openssl mod_ssl
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/apache-selfsigned.key -out /etc/pki/tls/certs/apache-selfsigned.crt
+```
+
+### update certificate
+```
+sudo vi /etc/pki/tls/certs/certificate.crt # copy certificate file from wp encrypt
+sudo vi /etc/pki/tls/private/private.key # copy private file from wp encrypt
+sudo vi /etc/httpd/conf.d/ssl.conf # update key sections with above certs
+
+sudo systemctl stop httpd
+sudo systemctl start httpd
 ```
