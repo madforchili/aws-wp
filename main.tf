@@ -44,6 +44,7 @@ resource "aws_instance" "wordpressfrontend" {
     security_groups = [ "fesgtf" ]
     
     tags = {
+        name = "2023Web"
         app = "wordpress"
         role = "frontend"
     }
