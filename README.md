@@ -1,6 +1,9 @@
 # aws-wp
 aws wordpress ec2 instance
 
+## login to aws console
+docklander@outlook.com
+
 ## repo
 https://github.com/madforchili/aws-wp/
 
@@ -50,7 +53,13 @@ sudo dnf install openssl mod_ssl
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/apache-selfsigned.key -out /etc/pki/tls/certs/apache-selfsigned.crt
 ```
 
-### update certificate
+## upgrade amazone linux 2023 to newer version
+```
+dnf check-update
+dnf upgrade --releasever=2023.4.20240319
+```
+
+## update certificate
 ```
 sudo vi /etc/pki/tls/certs/certificate.crt # copy certificate file from wp encrypt
 sudo vi /etc/pki/tls/private/private.key # copy private file from wp encrypt
